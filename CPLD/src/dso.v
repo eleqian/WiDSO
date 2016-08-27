@@ -81,7 +81,7 @@ module dso(nrst, clk,
     output fx_out;
     input trig_in;
     output trig_out;
-    output [3:0] debug;
+    output debug;
     
     // SPI读写接口
     wire [6:0] s_addr;
@@ -218,6 +218,5 @@ module dso(nrst, clk,
     // 频率计分频
     fdiv8 u_fxdiv(.nrst(nrst), .clkin(fx_in), .bypass(~fx_div8), .clkout(fx_out));
     
-    //assign debug = ~{fm_ovs, fm_sta, fm_ss, fm_clr};
-    assign debug = 4'b1111;
+    assign debug = 4'b0;
 endmodule
