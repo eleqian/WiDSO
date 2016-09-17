@@ -260,6 +260,11 @@ OutputName7=XSpice Netlist
 OutputDocumentPath7=
 OutputVariantName7=
 OutputDefault7=0
+OutputType8=WBSENetlistGeneration
+OutputName8=WEBENCH Simulation Engine
+OutputDocumentPath8=
+OutputVariantName8=
+OutputDefault8=0
 
 [OutputGroup2]
 Name=Simulator Outputs
@@ -281,6 +286,11 @@ OutputName3=SIMPLIS
 OutputDocumentPath3=
 OutputVariantName3=
 OutputDefault3=0
+OutputType4=WBSENetlist
+OutputName4=WEBENCH Simulation Engine
+OutputDocumentPath4=
+OutputVariantName4=
+OutputDefault4=0
 
 [OutputGroup3]
 Name=Documentation Outputs
