@@ -218,5 +218,5 @@ module dso(nrst, clk,
     // 频率计分频
     fdiv8 u_fxdiv(.nrst(nrst), .clkin(fx_in), .bypass(~fx_div8), .clkout(fx_out));
     
-    assign debug = 4'b0;
+    assign debug = dso_run; //'b0;
 endmodule

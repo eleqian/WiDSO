@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "MAX II"
 set_global_assignment -name DEVICE EPM240T100C5
-set_global_assignment -name TOP_LEVEL_ENTITY dso
+set_global_assignment -name TOP_LEVEL_ENTITY dsc
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "23:28:55  DECEMBER 26, 2015"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.1
@@ -76,8 +76,6 @@ set_location_assignment PIN_33 -to spi_sck
 set_location_assignment PIN_29 -to spi_si
 set_location_assignment PIN_30 -to spi_so
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED WITH BUS-HOLD"
-set_instance_assignment -name IO_STANDARD "3.3V SCHMITT TRIGGER INPUT" -to nrst
-set_instance_assignment -name IO_STANDARD "3.3V SCHMITT TRIGGER INPUT" -to spi_sck
 set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA ON
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "IO PATHS AND MINIMUM TPD PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
@@ -86,7 +84,6 @@ set_global_assignment -name ALM_REGISTER_PACKING_EFFORT HIGH
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS OFF
 set_global_assignment -name SMART_RECOMPILE ON
 set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
-set_location_assignment PIN_17 -to fx_in
 set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE 100%
 set_global_assignment -name EDA_TEST_BENCH_NAME deci_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id deci_tb
@@ -100,23 +97,6 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME addr_tb -section_id addr_
 set_global_assignment -name EDA_TEST_BENCH_NAME dso_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id dso_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME dso_tb -section_id dso_tb
-set_global_assignment -name VERILOG_FILE src/dso.v
-set_global_assignment -name VERILOG_FILE src/sspi.v
-set_global_assignment -name VERILOG_FILE src/smpl_deci.v
-set_global_assignment -name VERILOG_FILE src/dso_trig.v
-set_global_assignment -name VERILOG_FILE src/wave_trig.v
-set_global_assignment -name VERILOG_FILE src/la_trig.v
-set_global_assignment -name VERILOG_FILE src/addr_gen.v
-set_global_assignment -name VERILOG_FILE src/rw_ctrl.v
-set_global_assignment -name VERILOG_FILE src/reg_rw.v
-set_global_assignment -name VERILOG_FILE src/mux21n.v
-set_global_assignment -name VERILOG_FILE src/cntn.v
-set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/dso_tb.v
-set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/sspi_tb.v
-set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/deci_tb.v
-set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/trig_tb.v
-set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/addr_tb.v
-set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/rw_tb.v
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench/fmeter_tb.v -section_id fmeter
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench/sspi_tb.v -section_id sspi
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench/deci_tb.v -section_id deci_tb
@@ -175,25 +155,54 @@ set_location_assignment PIN_98 -to sram_noe
 set_location_assignment PIN_99 -to sram_addr[15]
 set_location_assignment PIN_100 -to sram_addr[16]
 set_location_assignment PIN_1 -to sram_addr[17]
-set_location_assignment PIN_26 -to spi_nirq
-set_location_assignment PIN_14 -to adc_in[7]
-set_location_assignment PIN_8 -to adc_in[6]
-set_location_assignment PIN_7 -to adc_in[5]
-set_location_assignment PIN_6 -to adc_in[4]
-set_location_assignment PIN_5 -to adc_in[3]
-set_location_assignment PIN_4 -to adc_in[2]
-set_location_assignment PIN_2 -to adc_in[0]
-set_location_assignment PIN_3 -to adc_in[1]
-set_location_assignment PIN_16 -to adc_pd
-set_location_assignment PIN_51 -to la_in[0]
-set_location_assignment PIN_50 -to la_in[1]
-set_location_assignment PIN_42 -to la_in[7]
-set_location_assignment PIN_43 -to la_in[6]
-set_location_assignment PIN_44 -to la_in[5]
-set_location_assignment PIN_47 -to la_in[4]
-set_location_assignment PIN_48 -to la_in[3]
-set_location_assignment PIN_49 -to la_in[2]
-set_location_assignment PIN_15 -to adc_clk
-set_location_assignment PIN_21 -to fx_out
-set_location_assignment PIN_18 -to trig_in
-set_location_assignment PIN_41 -to trig_out
+set_global_assignment -name VERILOG_FILE src/dsc.v
+set_global_assignment -name VERILOG_FILE src/dso.v
+set_global_assignment -name VERILOG_FILE src/sspi.v
+set_global_assignment -name VERILOG_FILE src/smpl_deci.v
+set_global_assignment -name VERILOG_FILE src/dso_trig.v
+set_global_assignment -name VERILOG_FILE src/wave_trig.v
+set_global_assignment -name VERILOG_FILE src/la_trig.v
+set_global_assignment -name VERILOG_FILE src/addr_gen.v
+set_global_assignment -name VERILOG_FILE src/rw_ctrl.v
+set_global_assignment -name VERILOG_FILE src/reg_rw.v
+set_global_assignment -name VERILOG_FILE src/mux21n.v
+set_global_assignment -name VERILOG_FILE src/cntn.v
+set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/dso_tb.v
+set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/sspi_tb.v
+set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/deci_tb.v
+set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/trig_tb.v
+set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/addr_tb.v
+set_global_assignment -name VERILOG_TEST_BENCH_FILE testbench/rw_tb.v
+set_instance_assignment -name IO_STANDARD "3.3V SCHMITT TRIGGER INPUT" -to nrst
+set_instance_assignment -name IO_STANDARD "3.3V SCHMITT TRIGGER INPUT" -to spi_sck
+set_location_assignment PIN_2 -to ch1d[11]
+set_location_assignment PIN_3 -to ch1d[10]
+set_location_assignment PIN_4 -to ch1d[9]
+set_location_assignment PIN_5 -to ch1d[8]
+set_location_assignment PIN_6 -to ch1d[7]
+set_location_assignment PIN_7 -to ch1d[6]
+set_location_assignment PIN_8 -to ch1d[5]
+set_location_assignment PIN_14 -to ch1d[4]
+set_location_assignment PIN_15 -to ch1d[3]
+set_location_assignment PIN_16 -to ch1d[2]
+set_location_assignment PIN_17 -to ch1d[1]
+set_location_assignment PIN_18 -to ch1d[0]
+set_location_assignment PIN_19 -to misc[2]
+set_location_assignment PIN_20 -to misc[1]
+set_location_assignment PIN_21 -to misc[0]
+set_location_assignment PIN_35 -to led
+set_location_assignment PIN_27 -to nirq[1]
+set_location_assignment PIN_26 -to nirq[0]
+set_location_assignment PIN_36 -to ch2d[0]
+set_location_assignment PIN_38 -to ch2d[1]
+set_location_assignment PIN_40 -to ch2d[2]
+set_location_assignment PIN_41 -to ch2d[3]
+set_location_assignment PIN_42 -to ch2d[4]
+set_location_assignment PIN_43 -to ch2d[5]
+set_location_assignment PIN_44 -to ch2d[6]
+set_location_assignment PIN_47 -to ch2d[7]
+set_location_assignment PIN_48 -to ch2d[8]
+set_location_assignment PIN_49 -to ch2d[9]
+set_location_assignment PIN_50 -to ch2d[10]
+set_location_assignment PIN_51 -to ch2d[11]
+set_location_assignment PIN_57 -to sram_addr[18]
