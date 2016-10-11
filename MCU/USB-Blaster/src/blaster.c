@@ -1,3 +1,29 @@
+/*
+blaster.c - USB-Blaster core
+
+MIT License
+
+Copyright (c) 2016 Yongqian Tang
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "base.h"
 #include "timebase.h"
 #include "usb_lib.h"
@@ -18,21 +44,26 @@
 
 /*-----------------------------------*/
 
+// usb rx/tx ready flag
 __IO BOOL g_blaster_rx_req = FALSE;
 __IO BOOL g_blaster_tx_ready = TRUE;
 
+// usb receive buffer, to output
 static uint8_t s_recv_buffer[RECV_BUFF_SIZE];
 static uint32_t s_recv_buff_len;
 static uint32_t s_recv_buff_idx;
 
+// usb send buffer, input from outside
 static uint8_t s_send_buffer[SEND_BUFF_SIZE];
 static uint8_t s_send_packet_buff[SEND_PACKET_SIZE];
 static ringbuf_t s_send_ring_buff;
 
+// operate mode & count
 static uint32_t s_blaster_shift_cnt;
 static BOOL s_blaster_shift_en;
 static BOOL s_blaster_read_en;
 
+// send dummy modem status periodicity (FTDI driver required)
 static uint32_t s_blaster_sendtime;
 static BOOL s_blaster_senddummy;
 

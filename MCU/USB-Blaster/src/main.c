@@ -1,3 +1,29 @@
+/*
+main.c
+
+MIT License
+
+Copyright (c) 2016 Yongqian Tang
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include <stdio.h>
 #include "base.h"
 #include "timebase.h"
@@ -10,18 +36,11 @@
 
 /*-----------------------------------*/
 
-// 软件复位
-void SoftReset(void)
-{
-    __set_FAULTMASK(1);     // 关闭所有中断
-    NVIC_SystemReset();     // 复位
-}
-
 // 判断按键是否按下
-BOOL Key_IsPressed(void)
+BOOL key_is_pressed(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-    BOOL isInto = FALSE;
+    BOOL is_press = FALSE;
 
     // 打开按键端口时钟
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
@@ -36,13 +55,13 @@ BOOL Key_IsPressed(void)
     delay_ms(10);
 
     // KEY按下时为低电平
-    isInto = !GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
+    is_press = !GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
 
     // 复位按键端口状态
     GPIO_DeInit(GPIOC);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, DISABLE);
 
-    return isInto;
+    return is_press;
 }
 
 /*-----------------------------------*/
@@ -51,22 +70,23 @@ int main(void)
 {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 
-    // 关JTAG，仅使用SWD
+    // disable JTAG，use SWD only
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
-    TimeBase_Init();
-    LED_Init();
+    timebase_init();
+    led_init();
     blaster_init();
     
-    if (!Key_IsPressed()) {
+    // for debug use
+    if (!key_is_pressed()) {
         USB_HW_Config();
         USB_Init();
     }
 
-    LED_Flash(1000, 200, 0);
+    led_flash(1000, 100, 0);
 
     while (1) {
-        LED_Exec();
+        led_update();
         if (bDeviceState == CONFIGURED)
         {
             blaster_exec();

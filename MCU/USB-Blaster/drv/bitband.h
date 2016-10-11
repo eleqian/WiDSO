@@ -2,9 +2,6 @@
 #define __BITBAND_H__
 
 // 位带操作
-// 具体实现思想,参考<<CM3权威指南>>第五章(87页~92页).
-
-// 位带操作
 #define BITBAND(addr, bitn)     (((addr) & 0xF0000000) + 0x2000000 + (((addr) & 0xFFFFF) << 5) + ((bitn) << 2))
 #define MEM_ADDR(addr)          *((volatile unsigned long *)(addr))
 #define BIT_ADDR(addr, bitn)    MEM_ADDR(BITBAND(addr, bitn))

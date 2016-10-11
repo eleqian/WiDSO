@@ -1,1 +1,1 @@
-USB BootLoader for MiCore with STM32F103C8T6.
+USB BootLoader for WiDSC.
