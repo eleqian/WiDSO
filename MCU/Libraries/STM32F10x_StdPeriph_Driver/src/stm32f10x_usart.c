@@ -445,7 +445,7 @@ void USART_ITConfig(USART_TypeDef* USARTx, uint16_t USART_IT, FunctionalState Ne
   *   This parameter can be any combination of the following values:
   *     @arg USART_DMAReq_Tx: USART DMA transmit request
   *     @arg USART_DMAReq_Rx: USART DMA receive request
-  * @param  NewState: new state of the DMA Request sources.
+  * @param  NewState: new state of the DMA s_last_request sources.
   *   This parameter can be: ENABLE or DISABLE.
   * @note The DMA mode is not available for UART5 except in the STM32
   *       High density value line devices(STM32F10X_HD_VL).  

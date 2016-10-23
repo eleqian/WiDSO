@@ -954,7 +954,7 @@ void TIM_DMAConfig(TIM_TypeDef* TIMx, uint16_t TIM_DMABase, uint16_t TIM_DMABurs
   * @brief  Enables or disables the TIMx's DMA Requests.
   * @param  TIMx: where x can be  1, 2, 3, 4, 5, 6, 7, 8, 15, 16 or 17 
   *   to select the TIM peripheral. 
-  * @param  TIM_DMASource: specifies the DMA Request sources.
+  * @param  TIM_DMASource: specifies the DMA s_last_request sources.
   *   This parameter can be any combination of the following values:
   *     @arg TIM_DMA_Update: TIM update Interrupt source
   *     @arg TIM_DMA_CC1: TIM Capture Compare 1 DMA source
@@ -963,7 +963,7 @@ void TIM_DMAConfig(TIM_TypeDef* TIMx, uint16_t TIM_DMABase, uint16_t TIM_DMABurs
   *     @arg TIM_DMA_CC4: TIM Capture Compare 4 DMA source
   *     @arg TIM_DMA_COM: TIM Commutation DMA source
   *     @arg TIM_DMA_Trigger: TIM Trigger DMA source
-  * @param  NewState: new state of the DMA Request sources.
+  * @param  NewState: new state of the DMA s_last_request sources.
   *   This parameter can be: ENABLE or DISABLE.
   * @retval None
   */
@@ -2113,7 +2113,7 @@ void TIM_UpdateDisableConfig(TIM_TypeDef* TIMx, FunctionalState NewState)
 }
 
 /**
-  * @brief  Configures the TIMx Update Request Interrupt source.
+  * @brief  Configures the TIMx Update s_last_request Interrupt source.
   * @param  TIMx: where x can be 1 to 17 to select the TIM peripheral.
   * @param  TIM_UpdateSource: specifies the Update source.
   *   This parameter can be one of the following values:

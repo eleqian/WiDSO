@@ -287,7 +287,7 @@ void CEC_EndOfMessageCmd(FunctionalState NewState)
   *     @arg CEC_FLAG_TBTFE: Tx Block Transfer Finished Error
   *     @arg CEC_FLAG_TEOM: Tx End Of Message 
   *     @arg CEC_FLAG_TERR: Tx Error
-  *     @arg CEC_FLAG_TBTRF: Tx Byte Transfer Request or Block Transfer Finished
+  *     @arg CEC_FLAG_TBTRF: Tx Byte Transfer s_last_request or Block Transfer Finished
   *     @arg CEC_FLAG_RSOM: Rx Start Of Message
   *     @arg CEC_FLAG_REOM: Rx End Of Message
   *     @arg CEC_FLAG_RERR: Rx Error
@@ -345,7 +345,7 @@ FlagStatus CEC_GetFlagStatus(uint32_t CEC_FLAG)
   * @param  CEC_FLAG: specifies the flag to clear. 
   *   This parameter can be any combination of the following values:
   *     @arg CEC_FLAG_TERR: Tx Error
-  *     @arg CEC_FLAG_TBTRF: Tx Byte Transfer Request or Block Transfer Finished
+  *     @arg CEC_FLAG_TBTRF: Tx Byte Transfer s_last_request or Block Transfer Finished
   *     @arg CEC_FLAG_RSOM: Rx Start Of Message
   *     @arg CEC_FLAG_REOM: Rx End Of Message
   *     @arg CEC_FLAG_RERR: Rx Error

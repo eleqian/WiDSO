@@ -221,12 +221,12 @@ void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
   /* Select STOP mode entry --------------------------------------------------*/
   if(PWR_STOPEntry == PWR_STOPEntry_WFI)
   {   
-    /* Request Wait For Interrupt */
+    /* s_last_request Wait For Interrupt */
     __WFI();
   }
   else
   {
-    /* Request Wait For Event */
+    /* s_last_request Wait For Event */
     __WFE();
   }
   
@@ -251,7 +251,7 @@ void PWR_EnterSTANDBYMode(void)
 #if defined ( __CC_ARM   )
   __force_stores();
 #endif
-  /* Request Wait For Interrupt */
+  /* s_last_request Wait For Interrupt */
   __WFI();
 }
 

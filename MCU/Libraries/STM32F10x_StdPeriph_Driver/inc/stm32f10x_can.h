@@ -510,9 +510,9 @@ typedef struct
 /* If the flag is 0x1XXXXXXX, it means that it can only be used with CAN_GetFlagStatus() function.  */
 
 /* Transmit Flags */
-#define CAN_FLAG_RQCP0             ((uint32_t)0x38000001) /*!< Request MailBox0 Flag */
-#define CAN_FLAG_RQCP1             ((uint32_t)0x38000100) /*!< Request MailBox1 Flag */
-#define CAN_FLAG_RQCP2             ((uint32_t)0x38010000) /*!< Request MailBox2 Flag */
+#define CAN_FLAG_RQCP0             ((uint32_t)0x38000001) /*!< s_last_request MailBox0 Flag */
+#define CAN_FLAG_RQCP1             ((uint32_t)0x38000100) /*!< s_last_request MailBox1 Flag */
+#define CAN_FLAG_RQCP2             ((uint32_t)0x38010000) /*!< s_last_request MailBox2 Flag */
 
 /* Receive Flags */
 #define CAN_FLAG_FMP0              ((uint32_t)0x12000003) /*!< FIFO 0 Message Pending Flag */

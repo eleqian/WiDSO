@@ -54,7 +54,7 @@
 
 #define MCR_DBF      ((uint32_t)0x00010000) /* software master reset */
 
-/* CAN Mailbox Transmit Request */
+/* CAN Mailbox Transmit s_last_request */
 #define TMIDxR_TXRQ  ((uint32_t)0x00000001) /* Transmit mailbox request */
 
 /* CAN Filter Master Register bits */
@@ -178,7 +178,7 @@ uint8_t CAN_Init(CAN_TypeDef* CANx, CAN_InitTypeDef* CAN_InitStruct)
   /* Exit from sleep mode */
   CANx->MCR &= (~(uint32_t)CAN_MCR_SLEEP);
 
-  /* Request initialisation */
+  /* s_last_request initialisation */
   CANx->MCR |= CAN_MCR_INRQ ;
 
   /* Wait the acknowledge */
@@ -261,7 +261,7 @@ uint8_t CAN_Init(CAN_TypeDef* CANx, CAN_InitTypeDef* CAN_InitStruct)
                 ((uint32_t)CAN_InitStruct->CAN_BS2 << 20) | \
                ((uint32_t)CAN_InitStruct->CAN_Prescaler - 1);
 
-    /* Request leave initialisation */
+    /* s_last_request leave initialisation */
     CANx->MCR &= ~(uint32_t)CAN_MCR_INRQ;
 
    /* Wait the acknowledge */
@@ -577,7 +577,7 @@ uint8_t CAN_Transmit(CAN_TypeDef* CANx, CanTxMsg* TxMessage)
                                              ((uint32_t)TxMessage->Data[6] << 16) |
                                              ((uint32_t)TxMessage->Data[5] << 8) |
                                              ((uint32_t)TxMessage->Data[4]));
-    /* Request transmission */
+    /* s_last_request transmission */
     CANx->sTxMailBox[transmit_mailbox].TIR |= TMIDxR_TXRQ;
   }
   return transmit_mailbox;
@@ -790,7 +790,7 @@ uint8_t CAN_OperatingModeRequest(CAN_TypeDef* CANx, uint8_t CAN_OperatingMode)
 
   if (CAN_OperatingMode == CAN_OperatingMode_Initialization)
   {
-    /* Request initialisation */
+    /* s_last_request initialisation */
     CANx->MCR = (uint32_t)((CANx->MCR & (uint32_t)(~(uint32_t)CAN_MCR_SLEEP)) | CAN_MCR_INRQ);
 
     /* Wait the acknowledge */
@@ -809,7 +809,7 @@ uint8_t CAN_OperatingModeRequest(CAN_TypeDef* CANx, uint8_t CAN_OperatingMode)
   }
   else  if (CAN_OperatingMode == CAN_OperatingMode_Normal)
   {
-    /* Request leave initialisation and sleep mode  and enter Normal mode */
+    /* s_last_request leave initialisation and sleep mode  and enter Normal mode */
     CANx->MCR &= (uint32_t)(~(CAN_MCR_SLEEP|CAN_MCR_INRQ));
 
     /* Wait the acknowledge */
@@ -828,7 +828,7 @@ uint8_t CAN_OperatingModeRequest(CAN_TypeDef* CANx, uint8_t CAN_OperatingMode)
   }
   else  if (CAN_OperatingMode == CAN_OperatingMode_Sleep)
   {
-    /* Request Sleep mode */
+    /* s_last_request Sleep mode */
     CANx->MCR = (uint32_t)((CANx->MCR & (uint32_t)(~(uint32_t)CAN_MCR_INRQ)) | CAN_MCR_SLEEP);
 
     /* Wait the acknowledge */
@@ -866,7 +866,7 @@ uint8_t CAN_Sleep(CAN_TypeDef* CANx)
   /* Check the parameters */
   assert_param(IS_CAN_ALL_PERIPH(CANx));
     
-  /* Request Sleep mode */
+  /* s_last_request Sleep mode */
    CANx->MCR = (((CANx->MCR) & (uint32_t)(~(uint32_t)CAN_MCR_INRQ)) | CAN_MCR_SLEEP);
    
   /* Sleep mode status */
