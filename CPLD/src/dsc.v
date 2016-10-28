@@ -57,5 +57,5 @@ module dsc(nrst, clk,
             .sram_addr(sram_addr[17:0]), .sram_dio(sram_dio), .sram_nce(sram_nce), .sram_noe(sram_noe),
             .sram_nwe(sram_nwe), .sram_nlb(sram_nlb), .sram_nub(sram_nub),
             .adc_in(adc_in), .adc_clk(adc_clk), .adc_pd(adc_pd),
-            .la_in(la_in), .fx_in(fx_in), .fx_out(fx_out), .trig_in(trig_in), .trig_out(trig_out), .debug(led));
+            .la_in(la_in), .fx_in(fx_in), .fx_out(fx_out), .trig_in(trig_in), .trig_out(trig_out), .led(led));
 endmodule

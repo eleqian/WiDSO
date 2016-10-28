@@ -48,12 +48,12 @@ endmodule
      adc_clk-ADC时钟输出
      adc_pd-ADC低功耗信号
      fx_out-待测时钟输出
-     debug-调试信号输出
+     led-LED信号输出
 */
 module dso(nrst, clk,
            spi_cs, spi_sck, spi_si, spi_so, spi_nirq,
            sram_addr, sram_dio, sram_nce, sram_noe, sram_nwe, sram_nlb, sram_nub,
-           adc_in, adc_clk, adc_pd, la_in, fx_in, fx_out, trig_in, trig_out, debug);
+           adc_in, adc_clk, adc_pd, la_in, fx_in, fx_out, trig_in, trig_out, led);
     // 全局信号
     input nrst;
     input clk;
@@ -81,7 +81,7 @@ module dso(nrst, clk,
     output fx_out;
     input trig_in;
     output trig_out;
-    output debug;
+    output led;
     
     // SPI读写接口
     wire [6:0] s_addr;
@@ -156,8 +156,9 @@ module dso(nrst, clk,
     // 地址写译码
     dso_regw u_regw(.nrst(nrst), .clk(clk),
         .addr(s_addr[2:0]), .din(s_dout), .we(s_we),
-        .reg0(com_ctrl), .reg1(trig_ctrl0), .reg2(trig_ctrl1), .reg3(trig_ctrl2),
-        .reg4(deci_cnt[7:0]), .reg5(deci_cnt[15:8]), .reg6(sram_rd_step));
+        .reg0(com_ctrl), .reg1(sram_rd_step),
+        .reg2(trig_ctrl0), .reg3(trig_ctrl1), .reg4(trig_ctrl2),
+        .reg5(deci_cnt[7:0]), .reg6(deci_cnt[15:8]));
 
     // 地址读译码
     dso_regr u_regr(.addr({2'b0, s_addr[0]}), .dout(s_din),
@@ -218,5 +219,5 @@ module dso(nrst, clk,
     // 频率计分频
     fdiv8 u_fxdiv(.nrst(nrst), .clkin(fx_in), .bypass(~fx_div8), .clkout(fx_out));
     
-    assign debug = dso_run; //'b0;
+    assign led = dso_run; //'b0;
 endmodule
